@@ -1,16 +1,10 @@
-# flutter_gitpod
+# Flutter+gitpod
 
-A new Flutter project.
+Example of how to use flutter with gitpod with the ability to build android apks.
 
-## Getting Started
+To be able to build an android apk:
+- run `/opt/android-studio/bin/studio.sh`
+- On the left panel click on remote explorer you'll see the list of open ports, you want the vnc one which is 6080, make it public and click on the browser icon to start the vnc session
+- follow the installation through then after its done open the sdk manager and install android 10 (api29), its not installed by default but its required by flutter
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Thats it now you can build apk with `flutter build apk`
