@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:io' show Process, Directory, File;
 
 void main() => runApp(MyApp());
 
@@ -21,11 +22,16 @@ class Body extends StatefulWidget {
   _BodyState createState() => _BodyState();
 }
 
+late final new_pair;
+
 class _BodyState extends State<Body> {
   final List<Widget> list = [];
 
   @override
   void initState() {
+    new_pair = () {
+      list.add(Pair());
+    };
     list.add(Pair());
     super.initState();
   }
@@ -44,16 +50,28 @@ class Pair extends StatefulWidget {
 }
 
 class _PairState extends State<Pair> {
-  var text = "test";
+  var text = "";
   @override
   Widget build(BuildContext context) {
     return Column(children: [
       TextField(
         onSubmitted: (out) => setState(() {
-          text = out;
+          text = eval(out);
+          new_pair();
         }),
       ),
       Text(text)
     ]);
+  }
+
+  String eval(String code) {
+    print(4);
+    final main = "fn main() {println!(\"{}\",$code)}";
+    Process.runSync("cargo", ["new", "repl"]);
+    Process.runSync("cd", ["repl"]);
+    File("src/main").writeAsStringSync(main);
+    final out = Process.runSync("cargo", ["run"]);
+    print(out);
+    return "${out.stderr}${out.stdout}";
   }
 }
