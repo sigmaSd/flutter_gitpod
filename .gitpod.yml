@@ -4,7 +4,7 @@ tasks:
 - before: >
     source ~/.bashrc
   init: >
-    flutter upgrade && 
+    flutter upgrade --force && 
     flutter update-packages --force-upgrade &&
     flutter run -d web-server --no-resident # prebuilds the app
   command: >
